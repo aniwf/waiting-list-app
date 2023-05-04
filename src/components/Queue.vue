@@ -44,8 +44,5 @@ table, th, td {
   margin-bottom: 30px;;
 }
 
-.center{
-    margin-left: auto;
-    margin-right: auto;
-}
+
 </style>

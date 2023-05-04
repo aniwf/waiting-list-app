@@ -2,14 +2,14 @@
     <div>
         <div class="Form">
         <h2 class="green">{{ msg }}</h2><br />
-        <form id="myForm" @submit.prevent="onSubmit()">
-            <label for="email" style="white-space: pre-line;">Email</label>
+        <form id="myForm" @submit.prevent="onSubmit()" style="margin-left : 25%; margin-right: 25%;">
+            <label for="email">Email</label>
             <div style="width: 100%;">
-                <input type="email" id="email" name="email" v-model="email" required>
+                <input type="email" id="email" name="email" v-model="email" size="30" required>
             </div>
-            <label for="refer" style="white-space: pre-line;">Referral Code</label>
+            <label for="refer">Referral Code</label>
             <div style="width: 100%;">
-                <input type="text" id="refer" name="refer" v-model="refer"><br><br>
+                <input type="text" id="refer" name="refer" v-model="refer" size="30"><br><br>
             </div>
             <input id="submit" type="submit" value="Submit">
         </form>
@@ -17,7 +17,7 @@
         <br/>
         <div v-show="show">
             <p>Your email {{ email }} is already registered</p>
-            <p>Your referal code: {{newReferCode}}</p>
+            <p>Your referal code: {{ newReferCode }}</p>
             <p>Your referal link: <a v-bind:href="newReferLink">{{newReferLink}}</a></p>
         </div>
     </div>
@@ -38,7 +38,7 @@ import { supabase } from '../supabase';
                 newReferCode: "",
                 newReferLink: "",
                 show: false,
-                url: "http://localhost:5173?refer="
+                url: "https://soft-torte-6f19a2.netlify.app/?refer="
             };
         },
         methods: {
@@ -241,6 +241,8 @@ import { supabase } from '../supabase';
                     }
                 }
 
+                return this.email;
+
 
             },
             
@@ -269,5 +271,11 @@ import { supabase } from '../supabase';
 </script>
 
 <style>
+    #submit {
+        float: right;
+        margin-left: 25%; 
+        margin-right: 15%;
+        
+    }
 
 </style>

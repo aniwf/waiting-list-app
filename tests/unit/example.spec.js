@@ -1,15 +1,24 @@
 import { mount } from '@vue/test-utils'
 import App from '@/App.vue'
+import Form from '@/components/Form.vue'
 
 describe('App.vue', () => {
-  it('check if email has value', async () => {
+  it('calls a method on the child component', async () => {
     const wrapper = mount(App)
-    const form = wrapper.getComponent({'name': 'Form'})
-    const queue = wrapper.getComponent({'name': 'Queue'})
-    form.setData({refer: 'kc03pU', email: 'sofyan@gmail.com' })
-    await form.find('#submit').trigger('click')
-    console.log(form.find('#submit').exists())
+    const form = wrapper.findComponent(Form);
+    
+    form.setData({email: 'sofyan@gmail.com', refer:'O201aY'})
+    //refer = O201aY belongs to loha@gmail.com
 
-    expect(form.text()).toBe('aniwahdah@gmail.com')
+    await form.vm.onSubmit();
+    const result = await wrapper.vm.getWaitingList();
+    var referUser = result.find(obj => obj.email === 'aniwahdah@gmail.com');
+  
+    const newUser = result[result.length-1];
+    console.log(result[result.length-1]);
+
+    if(expect(newUser.email).toBe("sofyan@gmail.com")){
+      expect(referUser.order).toBe(1);
+    }
   })
 })
